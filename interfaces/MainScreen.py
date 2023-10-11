@@ -72,10 +72,8 @@ class Screen(QtGui.QWidget):
         if (currentUser != None) :
             if(currentUser.isAdmin):
                 self.AdminsScreen = AdminsScreen.Screen(currentUser)
-                print('done closed')
                 self.AdminsScreen.show()
                 self.close()
-                print('done closed')
             else:
                 self.UsersScreen = UsersScreen.Screen(currentUser)
                 self.UsersScreen.show()
@@ -93,4 +91,3 @@ class Screen(QtGui.QWidget):
         else: 
             self.errorLabel.setText("User Don't Exist")
         return None
-    #some comment
