@@ -139,7 +139,7 @@ class Screen(QtGui.QWidget):
                 }
             """)
             questionWrapper.layout.addWidget(self.rightWindow.QuestionLabel)
-            self.rightWindow.ResponseLabel = QtGui.QLabel("Response : " + str(question.Response), self.rightWindow)
+            self.rightWindow.ResponseLabel = QtGui.QLabel("Response : " + ("Yes" if question.Response else "No"), self.rightWindow)
             self.rightWindow.ResponseLabel.setStyleSheet("""
                 QLabel { 
                     font-size :  16px;

@@ -9,7 +9,10 @@ list_of_users = [
 ]
 
 list_of_questions = [
-    Quiz("I Love Toutou", "Yes"),
-    Quiz("I Dont' Love Toutou", "No"),
-    Quiz("Toutou Assoul", "Yes")
+    Quiz("I Love Toutou", True),
+    Quiz("I Dont' Love Toutou", False),
+    Quiz("Toutou Assoul", True)
 ]
+
+
+list_of_users_response =[]

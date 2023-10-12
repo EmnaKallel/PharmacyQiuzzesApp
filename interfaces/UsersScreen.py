@@ -1,5 +1,8 @@
 from PyQt4 import QtGui, QtCore
-from models.Data import list_of_users
+import Style
+import ProfileScreen
+import TestsHistoryScreen
+import StatisticsScreen
 import MainScreen
 
 class Screen(QtGui.QWidget):
@@ -9,51 +12,48 @@ class Screen(QtGui.QWidget):
         self.layout = QtGui.QVBoxLayout()
         self.setLayout(self.layout)
         self.initUI()
+
     def initUI(self):
         self.setWindowTitle("QuizApp")
-        self.setFixedSize(500,500)
-        self.Label = QtGui.QLabel("User Account")
-        self.Label.setStyleSheet("""
-                QLabel { 
-                    font-size :  20px;
-                    color: rgb(45, 188, 45); 
-                    font-weight: bold; 
-                }
-            """)
-        self.layout.addWidget(self.Label)
-        self.welcome = QtGui.QLabel("WELCOME " + str(self.user.userName) + " !")
-        self.welcome.setStyleSheet("""
-                QLabel { 
-                    font-size :  18px;
-                    color: rgb(188, 45, 45); 
-                    font-weight: bold; 
-                }
-            """)
-        self.layout.addWidget(self.welcome)
-        self.btnsWrapper = QtGui.QWidget()
-        self.btnsWrapper.layout = QtGui.QVBoxLayout()
-        self.btnsWrapper.setLayout(self.btnsWrapper.layout)
-        self.layout.addWidget(self.btnsWrapper)
-        self.initSubmitAnswersBtn()
+        self.setFixedSize(700,900)
+        self.toolBarBtns = []
+        self.initToolBar()
+        self.initProfileScreen()
 
-    def initSubmitAnswersBtn(self):
-        self.SubmitAnswersBtn = QtGui.QPushButton("Submit Answers")
-        self.SubmitAnswersBtn.setStyleSheet(
-            """
-                QPushButton { 
-                    height: 30px; 
-                    background-color: rgb(188, 45, 45); 
-                    font-weight: bold; 
-                    border-radius:15px;
-                    padding: 3px 20px;
-                }
-                QPushButton:hover {
-                    background-color: rgb(220, 45, 45); 
-                }
-            """
-        )
-        self.SubmitAnswersBtn.clicked.connect(self.SubmitAnswers)
-        self.btnsWrapper.layout.addWidget(self.SubmitAnswersBtn, 1, QtCore.Qt.AlignRight)
+    def initToolBar(self):
+        toolbar = QtGui.QToolBar()
+        toolbar.setMovable(False)
+        self.layout.addWidget(toolbar)
 
-    def SubmitAnswers(self):
-        pass
+        button1 = QtGui.QPushButton('Profile', self)
+        button1.clicked.connect(self.initProfileScreen)
+        button2 = QtGui.QPushButton('Tests History', self)
+        button2.clicked.connect(self.initTestsHistoryScreen)
+        button3 = QtGui.QPushButton('Statistics', self)
+        button3.clicked.connect(self.initStatisticsScreen)
+
+        toolbar.addWidget(button1)
+        toolbar.addWidget(button2)
+        toolbar.addWidget(button3)
+
+        self.toolBarBtns.extend([button1, button2, button3])
+        for btn in self.toolBarBtns:
+            btn.setStyleSheet(Style.TOOLBAR_BTN_OFF)
+    
+    def initProfileScreen(self):
+        self.toolBarBtns[0].setStyleSheet(Style.TOOLBAR_BTN_ON)
+        ProfileScreen.Screen(self)
+        self.toolBarBtns[1].setStyleSheet(Style.TOOLBAR_BTN_OFF)
+        self.toolBarBtns[2].setStyleSheet(Style.TOOLBAR_BTN_OFF)
+
+    def initTestsHistoryScreen(self):
+        self.toolBarBtns[1].setStyleSheet(Style.TOOLBAR_BTN_ON)
+        TestsHistoryScreen.Screen(self)
+        self.toolBarBtns[0].setStyleSheet(Style.TOOLBAR_BTN_OFF)
+        self.toolBarBtns[2].setStyleSheet(Style.TOOLBAR_BTN_OFF)
+
+    def initStatisticsScreen(self):
+        self.toolBarBtns[2].setStyleSheet(Style.TOOLBAR_BTN_ON)
+        StatisticsScreen.Screen(self)
+        self.toolBarBtns[0].setStyleSheet(Style.TOOLBAR_BTN_OFF)
+        self.toolBarBtns[1].setStyleSheet(Style.TOOLBAR_BTN_OFF)
