@@ -147,7 +147,7 @@ class Screen(QtGui.QWidget):
                 Quiz(
                     self.QuestionField.text(),
                     self.adminResponse,
-                    self.NoteField.text(),
+                    int(self.NoteField.text()),
                 )
             )
             return True
