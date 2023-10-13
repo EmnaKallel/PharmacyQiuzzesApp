@@ -12,7 +12,12 @@ class Screen(QtGui.QWidget):
     def initUI(self):
         self.layout = QtGui.QVBoxLayout()
         self.setLayout(self.layout)
-        self.layout.setContentsMargins(0, 0, 0, 0)
+        self.ScrollArea = QtGui.QScrollArea()
+        self.layout.addWidget(self.ScrollArea)
+        self.Wrapper = QtGui.QWidget()
+        self.Wrapper.layout = QtGui.QVBoxLayout()
+        self.Wrapper.setLayout(self.Wrapper.layout)
+        self.Wrapper.layout.setContentsMargins(10, 5, 5, 5)
         
         while (self.callScreen.layout.count()>1):
             widget = self.callScreen.layout.itemAt(1).widget()
@@ -21,12 +26,33 @@ class Screen(QtGui.QWidget):
                 widget.setParent(None)
                 widget.deleteLater()
         self.callScreen.layout.insertWidget(1, self)
-        self.Label = QtGui.QLabel("Welcome To Your Statistics")
-        self.Label.setStyleSheet("""
+
+        self.Wrapper.Label = QtGui.QLabel("User Account")
+        self.Wrapper.Label.setStyleSheet("""
                 QLabel { 
                     font-size :  20px;
-                    color: rgb(45, 188, 45); 
+                    color: #2A7640; 
                     font-weight: bold; 
                 }
             """)
-        self.layout.addWidget(self.Label)
+        self.Wrapper.layout.addWidget(self.Wrapper.Label)
+        self.Wrapper.welcome = QtGui.QLabel("WELCOME " + str(self.callScreen.user.userName) + " !")
+        self.Wrapper.welcome.setStyleSheet("""
+                QLabel { 
+                    font-size :  18px;
+                    color: #6648B0; 
+                    font-weight: bold; 
+                }
+            """)
+        self.Wrapper.layout.addWidget(self.Wrapper.welcome)
+        self.Wrapper.Label1 = QtGui.QLabel("Statistical Graphics : ")
+        self.Wrapper.Label1.setStyleSheet("""
+                QLabel { 
+                    font-size :  25px;
+                    color : #9A48B0;
+                    font-weight: bold;
+                }
+            """)
+        self.Wrapper.layout.addWidget(self.Wrapper.Label1)
+
+        self.ScrollArea.setWidget(self.Wrapper)

@@ -15,19 +15,39 @@ class Screen(QtGui.QWidget):
         self.setWindowTitle("Add User")
         self.setFixedSize(350,500)
         self.titleLabel = QtGui.QLabel("Enter Your Informations : ")
+        self.titleLabel.setStyleSheet("""
+                QLabel { 
+                    font-weight: bold; 
+                }
+            """)
         self.layout.addWidget(self.titleLabel)
         self.FullNameLabel = QtGui.QLabel("Full Name : ")
+        self.FullNameLabel.setStyleSheet("""
+                QLabel { 
+                    font-weight: bold; 
+                }
+            """)
         self.layout.addWidget(self.FullNameLabel)
         self.FullNameField = QtGui.QLineEdit("", self)
         regex_validator1 = QtGui.QRegExpValidator(QtCore.QRegExp('^[a-zA-Z\s]+$'))
         self.FullNameField.setValidator(regex_validator1)
         self.layout.addWidget(self.FullNameField)
         self.PasswordLabel = QtGui.QLabel("Password : ")
+        self.PasswordLabel.setStyleSheet("""
+                QLabel { 
+                    font-weight: bold; 
+                }
+            """)
         self.layout.addWidget(self.PasswordLabel)
         self.PasswordField = QtGui.QLineEdit("", self)
         self.PasswordField.setEchoMode(QtGui.QLineEdit.Password)
         self.layout.addWidget(self.PasswordField)
         self.ConfirmPasswordLabel = QtGui.QLabel("Confirm Your Password : ")
+        self.ConfirmPasswordLabel.setStyleSheet("""
+                QLabel { 
+                    font-weight: bold; 
+                }
+            """)
         self.layout.addWidget(self.ConfirmPasswordLabel)
         self.ConfirmPasswordField = QtGui.QLineEdit("", self)
         self.ConfirmPasswordField.setEchoMode(QtGui.QLineEdit.Password)
@@ -48,20 +68,46 @@ class Screen(QtGui.QWidget):
         self.layout.addWidget(self.btnsWrapper)
         self.initSubmitBtn()
         self.initResetBtn()
+        self.initCancelBtn()
+
+    def initCancelBtn(self):
+        self.CancelBtn = QtGui.QPushButton("Cancel")
+        self.CancelBtn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.CancelBtn.setStyleSheet(
+            """
+                QPushButton { 
+                    width:95px;
+                    height: 30px; 
+                    background-color: #485EB0; 
+                    font-weight: bold; 
+                    border-radius:15px;
+                }
+                QPushButton:hover {
+                    background-color: #7CB1C7; 
+                }
+            """
+        )
+        self.CancelBtn.clicked.connect(self.CancelBtnSystem)
+        self.btnsWrapper.layout.addWidget(self.CancelBtn)
+
+    def CancelBtnSystem(self):
+        self.callScreen.show()
+        self.close()
 
     def initSubmitBtn(self):
         self.SubmitBtn = QtGui.QPushButton("Submit")
+        self.SubmitBtn.setCursor(QtCore.Qt.PointingHandCursor)
         self.SubmitBtn.setStyleSheet(
             """
                 QPushButton {
                     width:95px; 
                     height: 30px; 
-                    background-color: rgb(45, 108, 75); 
+                    background-color: #4AAD67; 
                     font-weight: bold; 
                     border-radius:15px;
                 }
                 QPushButton:hover {
-                    background-color: rgb(175, 220, 75); 
+                    background-color: #7CC7B7; 
                 }
             """
         )
@@ -70,17 +116,18 @@ class Screen(QtGui.QWidget):
 
     def initResetBtn(self):
         self.ResetBtn = QtGui.QPushButton("Reset")
+        self.ResetBtn.setCursor(QtCore.Qt.PointingHandCursor)
         self.ResetBtn.setStyleSheet(
             """
                 QPushButton {
                     width:95px; 
                     height: 30px; 
-                    background-color: rgb(188, 45, 45); 
+                    background-color: #BB6CB9; 
                     font-weight: bold; 
                     border-radius:15px;
                 }
                 QPushButton:hover {
-                    background-color: rgb(220, 45, 45); 
+                    background-color: #EDB1D4; 
                 }
             """
         )

@@ -19,15 +19,25 @@ class Screen(QtGui.QWidget):
         self.Label0.setAlignment(QtCore.Qt.AlignCenter)
         self.Label0.setStyleSheet("""
                 QLabel { 
-                    color: rgb(45, 188, 45); 
+                    color: #2A7640; 
                     font-weight: bold; 
                 }
             """)
         self.Label1 = QtGui.QLabel("User Name : ")
+        self.Label1.setStyleSheet("""
+                QLabel { 
+                    font-weight: bold; 
+                }
+            """)
         self.layout.addWidget(self.Label1)
         self.userNameField = QtGui.QLineEdit("", self)
         self.layout.addWidget(self.userNameField)
         self.Label2 = QtGui.QLabel("Password : ")
+        self.Label2.setStyleSheet("""
+                QLabel { 
+                    font-weight: bold; 
+                }
+            """)
         self.layout.addWidget(self.Label2)
         self.passwordField = QtGui.QLineEdit("", self)
         self.passwordField.setEchoMode(QtGui.QLineEdit.Password)
@@ -50,17 +60,18 @@ class Screen(QtGui.QWidget):
 
     def initLogInBtn(self):
         self.LogInBtn = QtGui.QPushButton("Log In")
+        self.LogInBtn.setCursor(QtCore.Qt.PointingHandCursor)
         self.LogInBtn.setStyleSheet(
             """
                 QPushButton {
                     width:95px; 
                     height: 30px; 
-                    background-color: rgb(45, 188, 45); 
+                    background-color: #4AAD67; 
                     font-weight: bold; 
                     border-radius:15px;
                 }
                 QPushButton:hover {
-                    background-color: rgb(45, 220, 45); 
+                    background-color: #7CC7B7; 
                 }
             """
         )

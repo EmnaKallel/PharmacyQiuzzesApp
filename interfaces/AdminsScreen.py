@@ -25,7 +25,7 @@ class Screen(QtGui.QWidget):
         self.Label.setStyleSheet("""
                 QLabel { 
                     font-size :  20px;
-                    color: rgb(45, 188, 45); 
+                    color: #2A7640; 
                     font-weight: bold; 
                 }
             """)
@@ -36,7 +36,7 @@ class Screen(QtGui.QWidget):
         self.welcome.setStyleSheet("""
                 QLabel { 
                     font-size :  18px;
-                    color: rgb(188, 45, 45); 
+                    color: #6648B0; 
                     font-weight: bold; 
                 }
             """)
@@ -46,17 +46,18 @@ class Screen(QtGui.QWidget):
 
     def initLogOutBtn(self):
         self.LogOutBtn = QtGui.QPushButton("Log Out")
+        self.LogOutBtn.setCursor(QtCore.Qt.PointingHandCursor)
         self.LogOutBtn.setStyleSheet(
             """
                 QPushButton { 
                     height: 30px; 
-                    background-color: rgb(188, 45, 45); 
+                    background-color: #485EB0; 
                     font-weight: bold; 
                     border-radius:15px;
                     padding: 3px 10px;
                 }
                 QPushButton:hover {
-                    background-color: rgb(220, 45, 45); 
+                    background-color: #7CB1C7; 
                 }
             """
         )
@@ -90,112 +91,139 @@ class Screen(QtGui.QWidget):
         self.layout.addWidget(self.dividedWidget)
 
     def initLeftWindow(self):
-        self.leftWindow.Label1 = QtGui.QLabel("List Of Users : ")
-        self.leftWindow.Label1.setStyleSheet("""
+        self.leftWindow.Wrapper = QtGui.QWidget()
+        self.leftWindow.Wrapper.layout = QtGui.QVBoxLayout()
+        self.leftWindow.Wrapper.setLayout(self.leftWindow.Wrapper.layout)
+        self.leftWindow.Wrapper.Label1 = QtGui.QLabel("List Of Users : ")
+        self.leftWindow.Wrapper.Label1.setStyleSheet("""
                 QLabel { 
                     font-size :  25px;
+                    color : #9A48B0;
+                    font-weight: bold;
                 }
             """)
-        self.leftWindow.layout.addWidget(self.leftWindow.Label1)
+        self.leftWindow.Wrapper.layout.addWidget(self.leftWindow.Wrapper.Label1)
 
         for user in list_of_users :
             userWrapper = QtGui.QWidget()
             userWrapper.layout = QtGui.QHBoxLayout()
             userWrapper.setLayout(userWrapper.layout)
+            userWrapper.setProperty('class', 'bottomseparator')
+            userWrapper.setStyleSheet("""
+                .bottomseparator{
+                    border : 1px solid black;
+                    border-radius: 8px;
+                    background-color: #E2E7F8;
+                }
+            """)
             
-            self.leftWindow.userNameLabel = QtGui.QLabel(str(user.userName))
-            self.leftWindow.userNameLabel.setStyleSheet("""
+            self.leftWindow.Wrapper.userNameLabel = QtGui.QLabel(str(user.userName))
+            self.leftWindow.Wrapper.userNameLabel.setStyleSheet("""
                 QLabel { 
                     font-size :  20px;
+                    font-weight: bold;
                 }
             """)
-            userWrapper.layout.addWidget(self.leftWindow.userNameLabel, 1)
+            userWrapper.layout.addWidget(self.leftWindow.Wrapper.userNameLabel, 1)
             self.initXBtn(userWrapper, user)
-            self.leftWindow.layout.addWidget(userWrapper)
+            self.leftWindow.Wrapper.layout.addWidget(userWrapper)
 
-        self.leftWindow.btnsWrapper = QtGui.QWidget()
-        self.leftWindow.btnsWrapper.layout = QtGui.QHBoxLayout()
-        self.leftWindow.btnsWrapper.setLayout(self.leftWindow.btnsWrapper.layout)
-        self.leftWindow.layout.addWidget(self.leftWindow.btnsWrapper)
+        self.leftWindow.Wrapper.btnsWrapper = QtGui.QWidget()
+        self.leftWindow.Wrapper.btnsWrapper.layout = QtGui.QHBoxLayout()
+        self.leftWindow.Wrapper.btnsWrapper.setLayout(self.leftWindow.Wrapper.btnsWrapper.layout)
+        self.leftWindow.Wrapper.layout.addWidget(self.leftWindow.Wrapper.btnsWrapper)
         self.initAddUserBtn()
+        self.leftWindow.setWidget(self.leftWindow.Wrapper)
 
     def initRightWindow(self):
-        self.rightWindow.Label1 = QtGui.QLabel("List Of Questions : ")
-        self.rightWindow.Label1.setStyleSheet("""
+        self.rightWindow.Wrapper = QtGui.QWidget()
+        self.rightWindow.Wrapper.layout = QtGui.QVBoxLayout()
+        self.rightWindow.Wrapper.setLayout(self.rightWindow.Wrapper.layout)
+        self.rightWindow.Wrapper.Label1 = QtGui.QLabel("List Of Questions : ")
+        self.rightWindow.Wrapper.Label1.setStyleSheet("""
                 QLabel { 
                     font-size :  25px;
+                    color : #9A48B0;
+                    font-weight: bold;
                 }
             """)
-        self.rightWindow.layout.addWidget(self.rightWindow.Label1)
+        self.rightWindow.Wrapper.layout.addWidget(self.rightWindow.Wrapper.Label1)
 
         for question in list_of_questions :
             questionWrapper = QtGui.QWidget()
+            questionWrapper.setProperty('class', 'bottomseparator')
+            questionWrapper.setStyleSheet("""
+                .bottomseparator{
+                    border : 1px solid black;
+                    border-radius: 8px;
+                    background-color: #E2E7F8;
+                    padding: 15px;
+                }
+            """)
             questionWrapper.layout = QtGui.QVBoxLayout()
             questionWrapper.setLayout(questionWrapper.layout)
-            self.rightWindow.QuestionLabel = QtGui.QLabel("Question : " + str(question.Question))
-            self.rightWindow.QuestionLabel.setStyleSheet("""
+            self.rightWindow.Wrapper.QuestionLabel = QtGui.QLabel("Question : " + str(question.Question))
+            self.rightWindow.Wrapper.QuestionLabel.setStyleSheet("""
                 QLabel { 
                     font-size :  16px;
+                    font-weight: bold;
                 }
             """)
-            questionWrapper.layout.addWidget(self.rightWindow.QuestionLabel)
-            self.rightWindow.ResponseLabel = QtGui.QLabel("Response : " + ("Yes" if question.Response else "No"), self.rightWindow)
-            self.rightWindow.ResponseLabel.setStyleSheet("""
+            questionWrapper.layout.addWidget(self.rightWindow.Wrapper.QuestionLabel)
+            self.rightWindow.Wrapper.ResponseLabel = QtGui.QLabel("Response : " + ("Yes" if question.Response else "No"), self.rightWindow)
+            self.rightWindow.Wrapper.ResponseLabel.setStyleSheet("""
                 QLabel { 
                     font-size :  16px;
+                    font-weight: bold;
                 }
             """)
-            questionWrapper.layout.addWidget(self.rightWindow.ResponseLabel)
-            self.rightWindow.EspacementLabel = QtGui.QLabel("--------------------------------------------", self.rightWindow)
-            self.rightWindow.EspacementLabel.setStyleSheet("""
-                QLabel { 
-                    font-size :  15px;
-                }
-            """)
-            questionWrapper.layout.addWidget(self.rightWindow.EspacementLabel)
-            self.rightWindow.layout.addWidget(questionWrapper)
+            questionWrapper.layout.addWidget(self.rightWindow.Wrapper.ResponseLabel)
+            self.rightWindow.Wrapper.layout.addWidget(questionWrapper)
 
-        self.rightWindow.btnsWrapper = QtGui.QWidget()
-        self.rightWindow.btnsWrapper.layout = QtGui.QHBoxLayout()
-        self.rightWindow.btnsWrapper.setLayout(self.rightWindow.btnsWrapper.layout)
-        self.rightWindow.layout.addWidget(self.rightWindow.btnsWrapper)
+        self.rightWindow.Wrapper.btnsWrapper = QtGui.QWidget()
+        self.rightWindow.Wrapper.btnsWrapper.layout = QtGui.QHBoxLayout()
+        self.rightWindow.Wrapper.btnsWrapper.setLayout(self.rightWindow.Wrapper.btnsWrapper.layout)
+        self.rightWindow.Wrapper.layout.addWidget(self.rightWindow.Wrapper.btnsWrapper)
         self.initAddQuestionBtn()
+        self.rightWindow.setWidget(self.rightWindow.Wrapper)
 
     def initAddUserBtn(self):
-        self.leftWindow.AddUserBtn = QtGui.QPushButton("+ Add User")
-        self.leftWindow.AddUserBtn.setStyleSheet(
+        self.leftWindow.Wrapper.AddUserBtn = QtGui.QPushButton("+ Add User")
+        self.leftWindow.Wrapper.AddUserBtn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.leftWindow.Wrapper.AddUserBtn.setStyleSheet(
             """
                 QPushButton {
-                    background-color: rgb(45, 188, 45); 
+                    background-color: #4AAD67; 
                     font-weight: bold; 
                     border-radius:15px;
                     padding: 5px 20px;
                 }
                 QPushButton:hover {
-                    background-color: rgb(45, 220, 45); 
+                    background-color: #7CC7B7; 
                 }
             """
         )
-        self.leftWindow.AddUserBtn.clicked.connect(self.initAddUserSystem)
-        self.leftWindow.btnsWrapper.layout.addWidget(self.leftWindow.AddUserBtn, 1, QtCore.Qt.AlignCenter)
+        self.leftWindow.Wrapper.AddUserBtn.clicked.connect(self.initAddUserSystem)
+        self.leftWindow.Wrapper.btnsWrapper.layout.addWidget(self.leftWindow.Wrapper.AddUserBtn, 1, QtCore.Qt.AlignCenter)
 
     def initAddQuestionBtn(self):
-        self.rightWindow.AddQuestionBtn = QtGui.QPushButton("+ Add Question")
-        self.rightWindow.AddQuestionBtn.setStyleSheet(
+        self.rightWindow.Wrapper.AddQuestionBtn = QtGui.QPushButton("+ Add Question")
+        self.rightWindow.Wrapper.AddQuestionBtn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.rightWindow.Wrapper.AddQuestionBtn.setStyleSheet(
             """
                 QPushButton {
-                    background-color: rgb(45, 188, 45); 
+                    background-color: #4AAD67; 
                     font-weight: bold; 
                     border-radius:15px;
                     padding: 5px 20px;
                 }
                 QPushButton:hover {
-                    background-color: rgb(45, 220, 45); 
+                    background-color: #7CC7B7; 
                 }
             """
         )
-        self.rightWindow.AddQuestionBtn.clicked.connect(self.initAddQuestionSystem)
-        self.rightWindow.btnsWrapper.layout.addWidget(self.rightWindow.AddQuestionBtn, 1, QtCore.Qt.AlignCenter)
+        self.rightWindow.Wrapper.AddQuestionBtn.clicked.connect(self.initAddQuestionSystem)
+        self.rightWindow.Wrapper.btnsWrapper.layout.addWidget(self.rightWindow.Wrapper.AddQuestionBtn, 1, QtCore.Qt.AlignCenter)
     
     def initAddUserSystem(self):
         self.AddUserScreen = AddUser.Screen(self)
@@ -227,18 +255,19 @@ class Screen(QtGui.QWidget):
 
     def initXBtn(self, userWrapper, user):
         Xbtn = QtGui.QPushButton("X")
+        Xbtn.setCursor(QtCore.Qt.PointingHandCursor)
         Xbtn.user = user
         Xbtn.setStyleSheet(
             """
                 QPushButton { 
                     height: 30px; 
-                    background-color: rgb(188, 45, 45); 
+                    background-color: #485EB0; 
                     font-weight: bold; 
                     border-radius:15px;
                     padding: 3px 10px;
                 }
                 QPushButton:hover {
-                    background-color: rgb(220, 45, 45); 
+                    background-color: #7CB1C7; 
                 }
             """
         )

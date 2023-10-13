@@ -6,7 +6,8 @@ TOOLBAR_BTN_ON = """
         border:1px solid rgb(80,120,80); 
         padding:10px 15px; 
         margin:1px; 
-        background-color: rgb(180,230,180)
+        background-color: #4AAD67;
+        font-weight: bold;
     }       
 """
 
@@ -18,10 +19,11 @@ TOOLBAR_BTN_OFF = """
         border:1px solid rgb(170,170,170); 
         padding:10px 15px; 
         margin:1px; 
-        background-color: rgb(215,235,215)
+        background-color: #7CC7B7;
+        font-weight: bold;
     } 
     QPushButton:hover
     {
-        background-color: rgb(225,240,225)
+        background-color: #B1EDC2
     } 
 """

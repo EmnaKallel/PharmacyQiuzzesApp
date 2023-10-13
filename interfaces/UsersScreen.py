@@ -15,7 +15,7 @@ class Screen(QtGui.QWidget):
 
     def initUI(self):
         self.setWindowTitle("QuizApp")
-        self.setFixedSize(700,900)
+        self.setFixedSize(600,800)
         self.toolBarBtns = []
         self.initToolBar()
         self.initProfileScreen()
@@ -27,10 +27,13 @@ class Screen(QtGui.QWidget):
 
         button1 = QtGui.QPushButton('Profile', self)
         button1.clicked.connect(self.initProfileScreen)
+        button1.setCursor(QtCore.Qt.PointingHandCursor)
         button2 = QtGui.QPushButton('Tests History', self)
         button2.clicked.connect(self.initTestsHistoryScreen)
+        button2.setCursor(QtCore.Qt.PointingHandCursor)
         button3 = QtGui.QPushButton('Statistics', self)
         button3.clicked.connect(self.initStatisticsScreen)
+        button3.setCursor(QtCore.Qt.PointingHandCursor)
 
         toolbar.addWidget(button1)
         toolbar.addWidget(button2)

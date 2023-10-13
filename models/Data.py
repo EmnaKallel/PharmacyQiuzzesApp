@@ -5,14 +5,11 @@ list_of_users = [
     User("Emna Kallel","emna"),
     User("achraf", "achraf"),
     User("emna","emna", True),
-    User("Roukaya Kallel", "roukaya", True) 
+    User("Roukaya Kallel", "roukaya", True), 
 ]
 
 list_of_questions = [
-    Quiz("I Love Toutou", True),
-    Quiz("I Dont' Love Toutou", False),
-    Quiz("Toutou Assoul", True)
+    Quiz("I Love Toutou", True, 3),
+    Quiz("I Dont' Love Toutou", False, 1),
+    Quiz("Toutou Assoul", True, 2),
 ]
-
-
-list_of_users_response =[]
