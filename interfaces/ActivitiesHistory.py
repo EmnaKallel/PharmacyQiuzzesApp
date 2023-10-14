@@ -26,7 +26,7 @@ class Screen(QtGui.QWidget):
                 widget.setParent(None)
                 widget.deleteLater()
         self.callScreen.layout.insertWidget(1, self)
-        
+
         self.Wrapper.Label = QtGui.QLabel("User Account")
         self.Wrapper.Label.setStyleSheet("""
                 QLabel { 
@@ -45,7 +45,7 @@ class Screen(QtGui.QWidget):
                 }
             """)
         self.Wrapper.layout.addWidget(self.Wrapper.welcome)
-        self.Wrapper.Label1 = QtGui.QLabel("Tests History List : ")
+        self.Wrapper.Label1 = QtGui.QLabel("Activities History : ")
         self.Wrapper.Label1.setStyleSheet("""
                 QLabel { 
                     font-size :  25px;

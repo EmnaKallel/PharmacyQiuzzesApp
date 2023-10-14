@@ -1,7 +1,8 @@
 from PyQt4 import QtGui, QtCore
 import Style
-import ProfileScreen
-import TestsHistoryScreen
+import TestsScreen
+import CoursesScreen
+import ActivitiesHistory
 import StatisticsScreen
 import MainScreen
 
@@ -14,49 +15,63 @@ class Screen(QtGui.QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setWindowTitle("QuizApp")
-        self.setFixedSize(600,800)
+        self.setWindowTitle("PharmacyQuizzesApp")
+        self.setFixedSize(600,850)
         self.toolBarBtns = []
         self.initToolBar()
-        self.initProfileScreen()
+        self.initTestsScreen()
 
     def initToolBar(self):
         toolbar = QtGui.QToolBar()
         toolbar.setMovable(False)
         self.layout.addWidget(toolbar)
 
-        button1 = QtGui.QPushButton('Profile', self)
-        button1.clicked.connect(self.initProfileScreen)
+        button1 = QtGui.QPushButton('Tests', self)
+        button1.clicked.connect(self.initTestsScreen)
         button1.setCursor(QtCore.Qt.PointingHandCursor)
-        button2 = QtGui.QPushButton('Tests History', self)
-        button2.clicked.connect(self.initTestsHistoryScreen)
+        button2 = QtGui.QPushButton('Courses', self)
+        button2.clicked.connect(self.initCoursesScreen)
         button2.setCursor(QtCore.Qt.PointingHandCursor)
-        button3 = QtGui.QPushButton('Statistics', self)
-        button3.clicked.connect(self.initStatisticsScreen)
+        button3 = QtGui.QPushButton('Activities History', self)
+        button3.clicked.connect(self.initActivitiesHistoryScreen)
         button3.setCursor(QtCore.Qt.PointingHandCursor)
+        button4 = QtGui.QPushButton('Statistics', self)
+        button4.clicked.connect(self.initStatisticsScreen)
+        button4.setCursor(QtCore.Qt.PointingHandCursor)
 
         toolbar.addWidget(button1)
         toolbar.addWidget(button2)
         toolbar.addWidget(button3)
+        toolbar.addWidget(button4)
 
-        self.toolBarBtns.extend([button1, button2, button3])
+        self.toolBarBtns.extend([button1, button2, button3, button4])
         for btn in self.toolBarBtns:
             btn.setStyleSheet(Style.TOOLBAR_BTN_OFF)
     
-    def initProfileScreen(self):
+    def initTestsScreen(self):
         self.toolBarBtns[0].setStyleSheet(Style.TOOLBAR_BTN_ON)
-        ProfileScreen.Screen(self)
+        TestsScreen.Screen(self)
         self.toolBarBtns[1].setStyleSheet(Style.TOOLBAR_BTN_OFF)
         self.toolBarBtns[2].setStyleSheet(Style.TOOLBAR_BTN_OFF)
+        self.toolBarBtns[3].setStyleSheet(Style.TOOLBAR_BTN_OFF)
 
-    def initTestsHistoryScreen(self):
+    def initCoursesScreen(self):
         self.toolBarBtns[1].setStyleSheet(Style.TOOLBAR_BTN_ON)
-        TestsHistoryScreen.Screen(self)
+        CoursesScreen.Screen(self)
         self.toolBarBtns[0].setStyleSheet(Style.TOOLBAR_BTN_OFF)
         self.toolBarBtns[2].setStyleSheet(Style.TOOLBAR_BTN_OFF)
+        self.toolBarBtns[3].setStyleSheet(Style.TOOLBAR_BTN_OFF)
+
+    def initActivitiesHistoryScreen(self):
+        self.toolBarBtns[2].setStyleSheet(Style.TOOLBAR_BTN_ON)
+        ActivitiesHistory.Screen(self)
+        self.toolBarBtns[0].setStyleSheet(Style.TOOLBAR_BTN_OFF)
+        self.toolBarBtns[1].setStyleSheet(Style.TOOLBAR_BTN_OFF)
+        self.toolBarBtns[3].setStyleSheet(Style.TOOLBAR_BTN_OFF)
 
     def initStatisticsScreen(self):
-        self.toolBarBtns[2].setStyleSheet(Style.TOOLBAR_BTN_ON)
+        self.toolBarBtns[3].setStyleSheet(Style.TOOLBAR_BTN_ON)
         StatisticsScreen.Screen(self)
         self.toolBarBtns[0].setStyleSheet(Style.TOOLBAR_BTN_OFF)
         self.toolBarBtns[1].setStyleSheet(Style.TOOLBAR_BTN_OFF)
+        self.toolBarBtns[2].setStyleSheet(Style.TOOLBAR_BTN_OFF)

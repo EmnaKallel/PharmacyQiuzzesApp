@@ -3,6 +3,7 @@ from models.User import User
 from models.Data import list_of_users
 import UsersScreen
 import AdminsScreen
+import SignIn
 
 class Screen(QtGui.QWidget):
     def __init__(self):
@@ -12,7 +13,7 @@ class Screen(QtGui.QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setWindowTitle("QuizApp")
+        self.setWindowTitle("PharmacyQuizzesApp")
         self.setFixedSize(400,250)
         self.Label0 = QtGui.QLabel("LOGIN PAGE")
         self.layout.addWidget(self.Label0)
@@ -57,6 +58,31 @@ class Screen(QtGui.QWidget):
         self.btnsWrapper.setLayout(self.btnsWrapper.layout)
         self.layout.addWidget(self.btnsWrapper)
         self.initLogInBtn()
+        self.initSignInBtn()
+
+    def initSignInBtn(self):
+        self.SignInBtn = QtGui.QPushButton("Sign In")
+        self.SignInBtn.setStyleSheet(
+            """
+                QPushButton {
+                    width:95px; 
+                    height: 30px; 
+                    background-color: #485EB0; 
+                    font-weight: bold; 
+                    border-radius:15px;
+                }
+                QPushButton:hover {
+                    background-color: #7CB1C7; 
+                }
+            """
+        )
+        self.SignInBtn.clicked.connect(self.initiateSignIn)
+        self.btnsWrapper.layout.addWidget(self.SignInBtn)
+    
+    def initiateSignIn(self):
+        self.SignInScreen = SignIn.Screen(self)
+        self.SignInScreen.show()
+        self.close()
 
     def initLogInBtn(self):
         self.LogInBtn = QtGui.QPushButton("Log In")

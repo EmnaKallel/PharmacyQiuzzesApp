@@ -16,7 +16,7 @@ class Screen(QtGui.QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setWindowTitle("QuizApp")
+        self.setWindowTitle("PharmacyQuizzesApp")
         self.setFixedSize(700,700)
         self.headerWrapper = QtGui.QWidget()
         self.headerWrapper.layout = QtGui.QHBoxLayout()
