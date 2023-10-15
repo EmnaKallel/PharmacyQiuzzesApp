@@ -1,7 +1,5 @@
 from PyQt4 import QtGui, QtCore
 from models.Data import list_of_questions
-import MainScreen
-import AdminsScreen
 from models.Quiz import Quiz
 
 class Screen(QtGui.QWidget):

@@ -1,10 +1,10 @@
 from PyQt4 import QtGui, QtCore
-from models.Data import list_of_subjects
 
 class SubjectWidget(QtGui.QWidget):
-    def __init__(self, subject):
+    def __init__(self, subject, notifyCaller):
         super(SubjectWidget, self).__init__()
         self.subject = subject
+        self.notifyCaller = notifyCaller
         self.initUI()
         
     def initUI(self):
@@ -13,21 +13,27 @@ class SubjectWidget(QtGui.QWidget):
         self.layout.setContentsMargins(0, 2, 0, 0)
         
         subjectWrapper = QtGui.QWidget()
-        subjectWrapper.setProperty('class', 'bottomseparator')
+        subjectWrapper.setProperty('class', 'subjectWrapper')
         #to add a line only at the bottom use : "border-bottom : 1px solid black;""
         subjectWrapper.setStyleSheet("""
-            .bottomseparator{
+            .subjectWrapper{
+                max-width: 470px;
+                min-width: 470px;
+                min-height: 50px;
                 border : 1px solid black;
                 border-radius: 8px;
                 background-color: #7CC7B7;
                 padding: 5px 20px;
+            }
+            .subjectWrapper:hover{
+                background-color: #B1EDC2;
             }
         """)
         
         subjectWrapper.layout = QtGui.QVBoxLayout()
         subjectWrapper.setCursor(QtCore.Qt.PointingHandCursor)
         subjectWrapper.setLayout(subjectWrapper.layout)
-        self.subjectLabel = QtGui.QLabel(str(self.subject.subjectsName))
+        self.subjectLabel = QtGui.QLabel(str(self.subject.subjectName))
         
         
         self.subjectLabel.setStyleSheet("""
@@ -41,4 +47,4 @@ class SubjectWidget(QtGui.QWidget):
         self.layout.addWidget(subjectWrapper)
 
     def mousePressEvent(self, event):
-        print(self.subject.subjectsName)
+        self.notifyCaller(self.subject)

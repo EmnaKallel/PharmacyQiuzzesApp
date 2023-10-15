@@ -4,7 +4,6 @@ import TestsScreen
 import CoursesScreen
 import ActivitiesHistory
 import StatisticsScreen
-import MainScreen
 
 class Screen(QtGui.QWidget):
     def __init__(self, user):

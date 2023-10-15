@@ -1,6 +1,5 @@
 from PyQt4 import QtGui, QtCore
 from models.Data import list_of_users
-import MainScreen
 from models.User import User
 
 class Screen(QtGui.QWidget):

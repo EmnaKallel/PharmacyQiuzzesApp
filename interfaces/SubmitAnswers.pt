@@ -1,6 +1,4 @@
 from PyQt4 import QtGui, QtCore
-import ProfileScreen
-
 
 class Screen(QtGui.QWidget):
     def __init__(self, callScreen, totalQuestions, correctAnswers, totalScore, userScore):

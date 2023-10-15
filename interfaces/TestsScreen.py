@@ -1,19 +1,26 @@
 from PyQt4 import QtGui, QtCore
-from models.Data import list_of_users
-from models.Data import list_of_questions
 from models.Data import list_of_subjects
 from customWidgets.SubjectWidget import SubjectWidget
-import Style
-import SubmitAnswers
+import interfaces.SubjectTestsScreen as SubjectTestsScreen
 import MainScreen
 
 class Screen(QtGui.QWidget):
     def __init__(self, callScreen):
         super(Screen, self).__init__()
         self.callScreen = callScreen
+        self.user = callScreen.user
         self.initUI()
     
     def initUI(self):
+        
+        while (self.callScreen.layout.count()>1):
+            widget = self.callScreen.layout.itemAt(1).widget()
+            if(widget):
+                self.callScreen.layout.removeWidget(widget)
+                widget.setParent(None)
+                widget.deleteLater()
+        self.callScreen.layout.insertWidget(1, self)
+        
         self.layout = QtGui.QVBoxLayout()
         self.setLayout(self.layout)
         self.ScrollArea = QtGui.QScrollArea()
@@ -23,14 +30,6 @@ class Screen(QtGui.QWidget):
         self.Wrapper.setLayout(self.Wrapper.layout)
         self.Wrapper.layout.setContentsMargins(10, 5, 5, 5)
         
-        while (self.callScreen.layout.count()>1):
-            widget = self.callScreen.layout.itemAt(1).widget()
-            if(widget):
-                self.callScreen.layout.removeWidget(widget)
-                widget.setParent(None)
-                widget.deleteLater()
-        self.callScreen.layout.insertWidget(1, self)
-
         self.Wrapper.Label = QtGui.QLabel("User Account")
         self.Wrapper.Label.setStyleSheet("""
                 QLabel { 
@@ -60,7 +59,7 @@ class Screen(QtGui.QWidget):
         self.Wrapper.layout.addWidget(self.Wrapper.Label1)
 
         for subject in list_of_subjects :
-            widget = SubjectWidget(subject)
+            widget = SubjectWidget(subject, self.onSubjectWidgetNotification)
             self.Wrapper.layout.addWidget(widget)
 
         self.Wrapper.btnsWrapper = QtGui.QWidget()
@@ -70,6 +69,9 @@ class Screen(QtGui.QWidget):
         self.initLogOutBtn()
         self.ScrollArea.setWidget(self.Wrapper)
 
+    def onSubjectWidgetNotification(self, subject):
+        SubjectTestsScreen.Screen(self, subject)
+    
     def initLogOutBtn(self):
         self.Wrapper.LogOutBtn = QtGui.QPushButton("Log Out")
         self.Wrapper.LogOutBtn.setCursor(QtCore.Qt.PointingHandCursor)

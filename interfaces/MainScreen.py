@@ -1,8 +1,6 @@
 from PyQt4 import QtGui, QtCore
-from models.User import User
 from models.Data import list_of_users
 import UsersScreen
-import AdminsScreen
 import SignIn
 
 class Screen(QtGui.QWidget):
@@ -106,15 +104,15 @@ class Screen(QtGui.QWidget):
     
     def initiateLogIn(self):
         currentUser = self.LogInUserSysteme()
-        if (currentUser != None) :
+        """if (currentUser != None) :
             if(currentUser.isAdmin):
                 self.AdminsScreen = AdminsScreen.Screen(currentUser)
                 self.AdminsScreen.show()
                 self.close()
-            else:
-                self.UsersScreen = UsersScreen.Screen(currentUser)
-                self.UsersScreen.show()
-                self.close()
+            else:"""
+        self.UsersScreen = UsersScreen.Screen(currentUser)
+        self.UsersScreen.show()
+        self.close()
 
     def LogInUserSysteme(self):
         userExists = False

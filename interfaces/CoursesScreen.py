@@ -1,7 +1,4 @@
-from PyQt4 import QtGui, QtCore
-from models.Data import list_of_users
-from models.Data import list_of_questions
-import Style
+from PyQt4 import QtGui
 
 class Screen(QtGui.QWidget):
     def __init__(self, callScreen):
