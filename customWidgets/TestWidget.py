@@ -32,9 +32,8 @@ class TestWidget(QtGui.QWidget):
         testWrapper.layout = QtGui.QVBoxLayout()
         testWrapper.setCursor(QtCore.Qt.PointingHandCursor)
         testWrapper.setLayout(testWrapper.layout)
+
         self.testLabel = QtGui.QLabel(str(self.test.TestName))
-        
-        
         self.testLabel.setStyleSheet("""
             QLabel { 
                 color : #040404;

@@ -1,15 +1,19 @@
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 from models.Data import list_of_subjects
 from customWidgets.TestWidget import TestWidget
 import interfaces.TakeTestScreen as TakeTestScreen
 
 class Screen(QtGui.QWidget):
+
     def __init__(self, callScreen, subject):
         super(Screen, self).__init__()
         self.callScreen = callScreen 
         self.subject = subject 
         self.initUI()
     
+    def redraw(self):
+        self = Screen(self.callScreen, self.subject)
+
     def initUI(self):
         
         while (self.callScreen.layout.count()>0):
@@ -19,11 +23,12 @@ class Screen(QtGui.QWidget):
                 widget.setParent(None)
                 widget.deleteLater()
         self.callScreen.layout.insertWidget(0, self)
-        
+
         self.layout = QtGui.QVBoxLayout()
         self.setLayout(self.layout)
         self.ScrollArea = QtGui.QScrollArea()
         self.layout.addWidget(self.ScrollArea)
+
         self.Wrapper = QtGui.QWidget()
         self.Wrapper.layout = QtGui.QVBoxLayout()
         self.Wrapper.setLayout(self.Wrapper.layout)
@@ -38,6 +43,7 @@ class Screen(QtGui.QWidget):
                 }
             """)
         self.Wrapper.layout.addWidget(self.Wrapper.Label)
+
         self.Wrapper.welcome = QtGui.QLabel("WELCOME " + str(self.callScreen.user.userName) + " !")
         self.Wrapper.welcome.setStyleSheet("""
                 QLabel { 
@@ -47,6 +53,7 @@ class Screen(QtGui.QWidget):
                 }
             """)
         self.Wrapper.layout.addWidget(self.Wrapper.welcome)
+
         self.Wrapper.subject = QtGui.QLabel(str(self.subject.subjectName))
         self.Wrapper.subject.setStyleSheet("""
                 QLabel { 
@@ -71,8 +78,36 @@ class Screen(QtGui.QWidget):
             widget = TestWidget(test, self.onTestWidgetNotification)
             self.Wrapper.layout.addWidget(widget)
 
+        self.Wrapper.btnsWrapper = QtGui.QWidget()
+        self.Wrapper.btnsWrapper.layout = QtGui.QHBoxLayout()
+        self.Wrapper.btnsWrapper.setLayout(self.Wrapper.btnsWrapper.layout)
+        self.Wrapper.layout.addWidget(self.Wrapper.btnsWrapper)
+        self.initBackBtn()
 
         self.ScrollArea.setWidget(self.Wrapper)
+
+    def initBackBtn(self):
+        self.Wrapper.BackBtn = QtGui.QPushButton("Back")
+        self.Wrapper.BackBtn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.Wrapper.BackBtn.setStyleSheet(
+            """
+                QPushButton { 
+                    width:95px;
+                    height: 30px; 
+                    background-color: #485EB0; 
+                    font-weight: bold; 
+                    border-radius:15px;
+                }
+                QPushButton:hover {
+                    background-color: #7CB1C7; 
+                }
+            """
+        )
+        self.Wrapper.BackBtn.clicked.connect(self.BackBtnSystem)
+        self.Wrapper.btnsWrapper.layout.addWidget(self.Wrapper.BackBtn)
+
+    def BackBtnSystem(self):
+        self.callScreen.redraw()
 
     def onTestWidgetNotification(self, subject):
         TakeTestScreen.Screen(self, subject)

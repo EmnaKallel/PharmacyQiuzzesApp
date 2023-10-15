@@ -11,6 +11,9 @@ class Screen(QtGui.QWidget):
         self.user = callScreen.user
         self.initUI()
     
+    def redraw(self):
+        self = Screen(self.callScreen)
+
     def initUI(self):
         
         while (self.callScreen.layout.count()>1):
@@ -25,6 +28,7 @@ class Screen(QtGui.QWidget):
         self.setLayout(self.layout)
         self.ScrollArea = QtGui.QScrollArea()
         self.layout.addWidget(self.ScrollArea)
+
         self.Wrapper = QtGui.QWidget()
         self.Wrapper.layout = QtGui.QVBoxLayout()
         self.Wrapper.setLayout(self.Wrapper.layout)
@@ -39,6 +43,7 @@ class Screen(QtGui.QWidget):
                 }
             """)
         self.Wrapper.layout.addWidget(self.Wrapper.Label)
+
         self.Wrapper.welcome = QtGui.QLabel("WELCOME " + str(self.callScreen.user.userName) + " !")
         self.Wrapper.welcome.setStyleSheet("""
                 QLabel { 
@@ -48,6 +53,7 @@ class Screen(QtGui.QWidget):
                 }
             """)
         self.Wrapper.layout.addWidget(self.Wrapper.welcome)
+
         self.Wrapper.Label1 = QtGui.QLabel("List Of Subjects : ")
         self.Wrapper.Label1.setStyleSheet("""
                 QLabel { 
@@ -67,6 +73,7 @@ class Screen(QtGui.QWidget):
         self.Wrapper.btnsWrapper.setLayout(self.Wrapper.btnsWrapper.layout)
         self.Wrapper.layout.addWidget(self.Wrapper.btnsWrapper)
         self.initLogOutBtn()
+        
         self.ScrollArea.setWidget(self.Wrapper)
 
     def onSubjectWidgetNotification(self, subject):

@@ -33,9 +33,8 @@ class SubjectWidget(QtGui.QWidget):
         subjectWrapper.layout = QtGui.QVBoxLayout()
         subjectWrapper.setCursor(QtCore.Qt.PointingHandCursor)
         subjectWrapper.setLayout(subjectWrapper.layout)
+        
         self.subjectLabel = QtGui.QLabel(str(self.subject.subjectName))
-        
-        
         self.subjectLabel.setStyleSheet("""
             QLabel { 
                 color : #040404;

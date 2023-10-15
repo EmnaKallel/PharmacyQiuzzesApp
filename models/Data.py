@@ -14,23 +14,23 @@ list_of_users = [
 list_of_subjects = [
     Subject("Hematology", [ 
         Test("Test 1 = ImmunoHematology",[
-            Quiz("what are the requirements for blood grouping?", [
-                QuestionOption("A: "),
-                QuestionOption("B: "),
-                QuestionOption("C: "),
-                QuestionOption("D: "),
+            Quiz("what are the requirements for blood <Br> grouping?", [
+                QuestionOption("A: Use the same test serum by two different technicians"),
+                QuestionOption("B: Use two different test sera by the same technician"),
+                QuestionOption("C: Including a Beth-Vincent globular test and a Simonin seric test", True),
+                QuestionOption("D: Use two different test sera by two different technicians", True),
             ]),
-            Quiz("which blood types can be a donor for group O+?", [
-                QuestionOption("A: "),
-                QuestionOption("B: "),
-                QuestionOption("C: "),
-                QuestionOption("D: "),
+            Quiz("which blood types can be a donor for <Br> group O+?", [
+                QuestionOption("A: O-", True),
+                QuestionOption("B: A+"),
+                QuestionOption("C: B+"),
+                QuestionOption("D: AB+"),
             ]),
-            Quiz("Which blood types can be a donor for group A-?", [
-                QuestionOption("A: "),
-                QuestionOption("B: "),
-                QuestionOption("C: "),
-                QuestionOption("D: "),
+            Quiz("Which blood types can be a donor for <Br> group A-?", [
+                QuestionOption("A: O-", True),
+                QuestionOption("B: AB-"),
+                QuestionOption("C: A-"),
+                QuestionOption("D: O+"),
             ]),
         ]),
         Test("Test 2 = Hemostasis",[
